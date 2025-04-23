@@ -20,7 +20,7 @@ class TwitterRepo @Inject constructor(private val twitterApi: TwittesApi) {
     get() = _tweets
 
     suspend fun getAllTweetsAccordingToCategory(category: String) {
-        twitterApi.getAllTweetsAccordingToCatagory(category).let {
+        twitterApi.getAllTweetsAccordingToCatagory("tweets[?(@.category==\"${category}\")]").let {
             if (it.isSuccessful) {
                 it.body()?.let { tweetsList ->
                     if (tweetsList.isNotEmpty()) {
